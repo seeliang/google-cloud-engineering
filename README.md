@@ -7,7 +7,7 @@ This repository contains a simple serverless text analysis service intended for 
 - `server/index.js` – Cloud Function entry point and reusable text analytics helper.
 - `server/package.json` – Function dependencies, local development scripts, and Node runtime constraint.
 - `server/test/analyzeText.test.js` – Unit tests validating the analytics logic and HTTP handler.
-- `deploy-server.bash` – Convenience script for deploying the function with the gcloud CLI.
+- `server/deploy-server.bash` – Convenience script for deploying the function with the gcloud CLI.
 - `app.yaml` – Sample App Engine configuration for serving a static UI.
 
 ## Prerequisites
@@ -55,11 +55,10 @@ Tests cover the reusable analytics helper and the HTTP handler, including CORS a
 
 ```bash
 cd server
-../deploy-server.bash \
-  --project YOUR_GCP_PROJECT
+./deploy-server.bash
 ```
 
-The script deploys the `analyzeText` function as an HTTP Cloud Function in `us-central1`. You can pass additional flags (for example `--entry-point` or `--runtime`) as needed; see `gcloud functions deploy --help` for options.
+The script deploys the `analyzeText` function as an HTTP Cloud Function in `us-central1` using the Node.js 20 runtime by default. It falls back to the `cloud-engineer-certify` project unless you supply `--project` or set `GCLOUD_PROJECT` / `GOOGLE_CLOUD_PROJECT`. Provide additional flags as needed (for example `--runtime=nodejs22`); see `gcloud functions deploy --help` for options.
 
 ## App Engine Static Hosting
 
