@@ -1,0 +1,17 @@
+runtime: nodejs22
+instance_class: F1 # A small, inexpensive instance class
+
+handlers:
+  # Serve all static files from the build directory
+  - url: /static
+    static_dir: build/static
+
+  # Serve the main index.html for all other routes to support client-side routing
+  - url: /.*
+    static_files: build/index.html
+    upload: build/index.html
+
+# Optional: Add automatic scaling rules here to discuss during the interview
+automatic_scaling:
+  min_instances: 0
+  max_instances: 2
