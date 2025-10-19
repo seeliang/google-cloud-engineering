@@ -9,6 +9,7 @@ This repository contains a simple serverless text analysis service intended for 
 - `server/test/analyzeText.test.js` – Unit tests validating the analytics logic and HTTP handler.
 - `server/deploy-server.bash` – Convenience script for deploying the function with the gcloud CLI.
 - `web/index.js` – Express server that forwards requests to the Cloud Function.
+- `package.json` / `pnpm-workspace.yaml` – Workspace root configuration and shared scripts.
 - `app.yaml` – Sample App Engine configuration for serving a static UI.
 
 ## Prerequisites
@@ -20,21 +21,20 @@ This repository contains a simple serverless text analysis service intended for 
 ## Install Dependencies
 
 ```bash
-cd server
 pnpm install
 ```
 
-> Replace `pnpm` with `npm` if you prefer the default Node package manager.
+This command installs dependencies for every workspace package (`server` and `web`).
 
 ## Run Locally
 
 Use the Functions Framework to exercise the handler on your machine:
 
 ```bash
-pnpm start
+pnpm start:function
 ```
 
-Then send a request:
+Then send a request (in a separate terminal):
 
 ```bash
 curl -X POST http://localhost:8080 \
@@ -57,12 +57,10 @@ Tests cover the reusable analytics helper and the HTTP handler, including CORS a
 Launch a simple Express frontend that relays requests to the Cloud Function:
 
 ```bash
-cd web
-pnpm install        # first run only
-ANALYZE_FUNCTION_URL=https://REGION-PROJECT.cloudfunctions.net/analyzeText pnpm start
+ANALYZE_FUNCTION_URL=https://REGION-PROJECT.cloudfunctions.net/analyzeText pnpm start:web
 ```
 
-`ANALYZE_FUNCTION_URL` defaults to `http://localhost:8080`, which pairs with the Functions Framework dev server. The proxy serves a basic HTML form at `http://localhost:3000` and also exposes a JSON endpoint at `/api/analyze`.
+`ANALYZE_FUNCTION_URL` defaults to `http://localhost:8080`, which pairs with the Functions Framework dev server started via `pnpm start:function`. The proxy serves a basic HTML form at `http://localhost:3000` and also exposes a JSON endpoint at `/api/analyze`.
 
 ## Deploy the Cloud Function
 

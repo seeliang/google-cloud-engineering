@@ -1,0 +1,12 @@
+{
+  "name": "google-cloud-engineering-monorepo",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Workspace root for the text analyzer Cloud Function and Express proxy",
+  "license": "ISC",
+  "scripts": {
+    "start:function": "pnpm --filter text-analyzer-function start",
+    "start:web": "pnpm --filter text-analyzer-express start",
+    "test": "pnpm -r test"
+  }
+}
