@@ -14,7 +14,7 @@ This repository contains a simple serverless text analysis service intended for 
 
 ## Prerequisites
 
-- Node.js 18 or newer.
+- Node.js 22.x.
 - `pnpm` (recommended) or `npm` for dependency management.
 - Google Cloud CLI authenticated against the target project for deployment.
 
@@ -69,7 +69,17 @@ cd server
 ./deploy-server.bash
 ```
 
-The script deploys the `analyzeText` function as an HTTP Cloud Function in `us-central1` using the Node.js 20 runtime by default. It falls back to the `cloud-engineer-certify` project unless you supply `--project` or set `GCLOUD_PROJECT` / `GOOGLE_CLOUD_PROJECT`. Provide additional flags as needed (for example `--runtime=nodejs22`); see `gcloud functions deploy --help` for options.
+The script deploys the `analyzeText` function as an HTTP Cloud Function in `us-central1` using the Node.js 22 runtime by default. It falls back to the `cloud-engineer-certify` project unless you supply `--project` or set `GCLOUD_PROJECT` / `GOOGLE_CLOUD_PROJECT`. Provide additional flags as needed; see `gcloud functions deploy --help` for options.
+
+## Release Both Services
+
+Run the combined release helper to deploy the Cloud Function first and then the App Engine app defined in `app.yaml`:
+
+```bash
+pnpm release
+```
+
+The script defaults to the `cloud-engineer-certify` project; override with `--project YOUR_GCP_PROJECT` if needed. Pass extra flags with `--server FLAG` or `--web FLAG` (repeat as needed) to forward them to the respective deployment commands.
 
 ## App Engine Static Hosting
 

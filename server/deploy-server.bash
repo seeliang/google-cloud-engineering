@@ -29,7 +29,7 @@ EOF
 fi
 
 gcloud functions deploy analyzeText \
-  --runtime=nodejs20 \
+  --runtime=nodejs22 \
   --entry-point=analyzeTextHandler \
   --trigger-http \
   --allow-unauthenticated \
