@@ -18,11 +18,11 @@ Usage: release-all.bash [options]
 Options:
   --project <id>       Google Cloud project to deploy to (applies to both steps).
   --project=<id>       Same as above.
-  --server <arg>       Extra argument passed to server/deploy-server.bash (repeatable).
-  --web <arg>          Extra argument passed to gcloud app deploy (repeatable).
+    --server <arg>       Extra argument passed to server/release-server.sh (repeatable).
+    --web <arg>          Extra argument passed to web/release-web.sh (repeatable).
   --help               Show this help text.
 
-The script deploys the Cloud Function first, then the App Engine app configured by app.yaml.
+The script deploys the Cloud Function first, then the App Engine app in web/app.yaml.
 If no project is supplied, it defaults to cloud-engineer-certify.
 EOF
 }
@@ -64,25 +64,25 @@ if [[ -z "${project}" ]]; then
     project="${DEFAULT_PROJECT}"
 fi
 
-declare -a server_cmd=("${REPO_ROOT}/server/deploy-server.bash")
-if [[ -n "${project}" ]]; then
-    server_cmd+=("--project=${project}")
+server_script="${REPO_ROOT}/server/release-server.sh"
+web_script="${REPO_ROOT}/web/release-web.sh"
+
+declare -a server_cmd=("bash" "${server_script}" "${project}")
+if ((${#server_args[@]})); then
+    server_cmd+=("${server_args[@]}")
 fi
-server_cmd+=("${server_args[@]}")
 
 echo "Deploying Cloud Function..."
-(
-    cd "${REPO_ROOT}/server"
-    "${server_cmd[@]}"
-)
 
-declare -a web_cmd=("gcloud" "app" "deploy" "${REPO_ROOT}/app.yaml")
-if [[ -n "${project}" ]]; then
-    web_cmd+=("--project=${project}")
+"${server_cmd[@]}"
+
+declare -a web_cmd=("bash" "${web_script}" "${project}")
+if ((${#web_args[@]})); then
+    web_cmd+=("${web_args[@]}")
 fi
-web_cmd+=("${web_args[@]}")
 
 echo "Deploying App Engine app..."
+
 "${web_cmd[@]}"
 
 echo "Release complete."
