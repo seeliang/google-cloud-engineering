@@ -2,6 +2,10 @@
 runtime: nodejs22
 entrypoint: node index.js
 
+automatic_scaling:
+  min_instances: 0
+  max_instances: 1
+
 handlers:
   # 1. API Calls: Route all URLs starting with /api to your Express server
   - url: /api/.*
