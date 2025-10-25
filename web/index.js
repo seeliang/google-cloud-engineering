@@ -2,7 +2,9 @@ const express = require('express');
 
 const app = express();
 const port = Number(process.env.PORT || 3000);
-const functionUrl = process.env.ANALYZE_FUNCTION_URL || 'http://localhost:8080'; // Default local Functions Framework endpoint.
+const productionFunctionUrl = 'https://us-central1-cloud-engineer-certify.cloudfunctions.net/analyzeText';
+const defaultFunctionUrl = process.env.NODE_ENV === 'production' ? productionFunctionUrl : 'http://localhost:8080';
+const functionUrl = process.env.ANALYZE_FUNCTION_URL || defaultFunctionUrl;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
