@@ -1,17 +1,12 @@
-runtime: nodejs22
-instance_class: F1 # A small, inexpensive instance class
+# app.yaml
+runtime: nodejs22 # Specifies the Node.js runtime
 
-handlers:
-  # Serve all static files from the build directory
-  - url: /static
-    static_dir: build/static
+# This is the default instance class, good for simple apps
+instance_class: F1 
 
-  # Serve the main index.html for all other routes to support client-side routing
-  - url: /.*
-    static_files: build/index.html
-    upload: build/index.html
-
-# Optional: Add automatic scaling rules here to discuss during the interview
+# App Engine will automatically look for and run your "start" script
+# in package.json. You can also override it with 'entrypoint':
+# entrypoint: node server.js
 automatic_scaling:
   min_instances: 0
-  max_instances: 2
+  max_instances: 1
