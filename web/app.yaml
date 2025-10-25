@@ -1,0 +1,15 @@
+# app.yaml
+runtime: nodejs22
+entrypoint: node index.js
+
+handlers:
+  # 1. API Calls: Route all URLs starting with /api to your Express server
+  - url: /api/.*
+    script: auto
+    secure: always
+
+  # 2. React App: Serve the main index.html for all other routes
+  # This enables client-side routing.
+  - url: /.*
+    script: auto
+    secure: always
