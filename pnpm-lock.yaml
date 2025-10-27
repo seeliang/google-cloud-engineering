@@ -8,13 +8,13 @@ importers:
 
   .: {}
 
-  server:
+  cloud-function:
     dependencies:
       '@google-cloud/functions-framework':
         specifier: ^4.0.0
         version: 4.0.0
 
-  web:
+  app-engine:
     dependencies:
       express:
         specifier: ^4.19.2

@@ -21,7 +21,7 @@ EXTRA_ARGS=("$@")
 
 if [[ -z "${PROJECT_ID}" ]]; then
   cat <<'EOF' >&2
-Usage: ./release-server.sh [PROJECT_ID] [additional gcloud flags]
+Usage: ./release-cloud-function.sh [PROJECT_ID] [additional gcloud flags]
 Either pass the project id explicitly or set GOOGLE_CLOUD_PROJECT.
 EOF
   exit 1
