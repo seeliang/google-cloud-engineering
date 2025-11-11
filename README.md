@@ -15,7 +15,7 @@ This repository contains a simple serverless text analysis service intended for 
 
 ## Prerequisites
 
-- Node.js 22.x.
+- Node.js 24.x.
 - `pnpm` (recommended) or `npm` for dependency management.
 - Google Cloud CLI authenticated against the target project for deployment.
 
@@ -70,7 +70,7 @@ cd cloud-function
 ./release-cloud-function.sh
 ```
 
-The script deploys the `analyzeText` function as an HTTP Cloud Function in `us-central1` using the Node.js 22 runtime by default. It falls back to the `cloud-engineer-certify` project unless you supply a project id as the first argument or set `GOOGLE_CLOUD_PROJECT`. Extra arguments are forwarded to `gcloud functions deploy`; see `gcloud functions deploy --help` for options.
+The script deploys the `analyzeText` function as an HTTP Cloud Function in `us-central1` using the Node.js 24 runtime by default. It falls back to the `cloud-engineer-certify` project unless you supply a project id as the first argument or set `GOOGLE_CLOUD_PROJECT`. Extra arguments are forwarded to `gcloud functions deploy`; see `gcloud functions deploy --help` for options.
 
 ## Deploy the Web App
 
@@ -93,9 +93,9 @@ The script defaults to the `cloud-engineer-certify` project; override with `--pr
 
 ## App Engine Deployment Notes
 
-`app-engine/app.yaml` runs the Express proxy on App Engine Standard with the Node.js 22 runtime and automatic scaling between zero and one instance. No static build step is required for the current setup, but you can extend the handler configuration to serve compiled assets if you add a React or other SPA frontend later.
+`app-engine/app.yaml` runs the Express proxy on App Engine Standard with the Node.js 24 runtime and automatic scaling between zero and one instance. No static build step is required for the current setup, but you can extend the handler configuration to serve compiled assets if you add a React or other SPA frontend later.
 
 ## Troubleshooting
 
-- Ensure Node 22.x is installed; earlier runtimes do not support the optional chaining used by the handler and will fail the engine check.
+- Ensure Node 24.x is installed; earlier runtimes do not support the optional chaining used by the handler and will fail the engine check.
 - If CORS requests fail, verify that the caller sends an `OPTIONS` pre-flight request and that no custom headers beyond `Content-Type` are required. Update the handler if your UI needs additional headers or methods.

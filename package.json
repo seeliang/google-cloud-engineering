@@ -11,6 +11,6 @@
         "release": "./scripts/release-all.bash"
     },
     "engines": {
-        "node": "22.x"
+        "node": "24.x"
     }
 }
