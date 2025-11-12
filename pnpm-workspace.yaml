@@ -1,3 +1,4 @@
 packages:
   - cloud-function
   - app-engine
+  - google-ai-studio

@@ -1,3 +1,6 @@
 node_modules/
 */node_modules/*
 .pnpm-store/
+credential.json
+env.local.json
+google-ai-studio/results/
