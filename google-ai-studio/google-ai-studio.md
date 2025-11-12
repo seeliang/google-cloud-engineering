@@ -26,5 +26,5 @@ Validate the Google AI Studio service end-to-end, capture learnings, and documen
 			]
 		}'
 	```
-- **Result capture:** The Node utility writes the last response to `results/latest-response.json` (configurable via `AI_API_OUTPUT_PATH`) for later analysis.
+- **Result capture:** The Node utility writes each response to `results/ai-response-<timestamp>.json` (path template configurable via `AI_API_OUTPUT_PATH` using a `%DATE%` placeholder) for later analysis.
 

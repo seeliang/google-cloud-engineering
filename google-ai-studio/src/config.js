@@ -3,7 +3,7 @@ import path from 'node:path';
 import process from 'node:process';
 
 const DEFAULT_BASE_URL = 'https://generativelanguage.googleapis.com/v1beta';
-const DEFAULT_MODEL = 'models/gemini-2.0-flash';
+const DEFAULT_MODEL = 'models/gemini-2.5-flash';
 
 const FILE_ENCODING = 'utf-8';
 
@@ -26,14 +26,30 @@ function resolveFromCredentialFile() {
 }
 
 function resolveOutputPath(rawValue) {
-    const fallback = path.resolve(process.cwd(), 'results/latest-response.json');
-    if (!rawValue) {
-        return fallback;
+    const placeholder = '%DATE%';
+    const pattern = rawValue ?? 'results/ai-response-%DATE%.json';
+
+    const resolvedPattern = path.isAbsolute(pattern)
+        ? pattern
+        : path.resolve(process.cwd(), pattern);
+
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+    const occurrences = (resolvedPattern.match(new RegExp(placeholder, 'g')) ?? []).length;
+
+    if (occurrences > 1) {
+        throw new Error('Configured AI_API_OUTPUT_PATH must not contain multiple %DATE% placeholders.');
     }
-    if (path.isAbsolute(rawValue)) {
-        return rawValue;
+
+    if (occurrences === 1) {
+        return resolvedPattern.replace(placeholder, timestamp);
     }
-    return path.resolve(process.cwd(), rawValue);
+
+    const parsed = path.parse(resolvedPattern);
+    const baseName = parsed.name || 'ai-response';
+    const extension = parsed.ext || '.json';
+    const filename = `${baseName}-${timestamp}${extension}`;
+    const directory = parsed.dir || process.cwd();
+    return path.join(directory, filename);
 }
 
 export function loadConfig() {
