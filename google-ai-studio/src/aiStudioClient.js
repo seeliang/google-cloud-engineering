@@ -53,8 +53,9 @@ export async function generateContent({
 
 export async function run({
     fetchImpl = fetch,
-    prompt = 'Explain how AI works in a few words',
+    prompt = 'Explain what is the full name of this javascript, and what is it doing in within 70 words',
     logger = console,
+
     outputPath,
     ...config
 }) {

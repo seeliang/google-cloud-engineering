@@ -1,0 +1,25 @@
+{
+    "name": "vertex-gemini-client",
+    "version": "0.1.0",
+    "description": "Reusable Vertex AI Gemini client wrapper for the Google Cloud engineering monorepo.",
+    "private": true,
+    "main": "src/index.js",
+    "files": [
+        "src"
+    ],
+    "scripts": {
+        "runWithConfig": "node scripts/runFromConfig.js",
+        "lint": "eslint src test",
+        "test": "node --test"
+    },
+    "dependencies": {
+        "@google-cloud/vertexai": "^1.3.1"
+    },
+    "devDependencies": {
+        "eslint": "^9.13.0"
+    },
+    "engines": {
+        "node": "24.x"
+    },
+    "license": "ISC"
+}

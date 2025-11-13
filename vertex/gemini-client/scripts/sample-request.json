@@ -1,0 +1,30 @@
+{
+    "overrides": {
+        "project": "your-cloud-project",
+        "location": "us-central1",
+        "systemInstructionParts": [
+            {
+                "text": "You are a helpful billing assistant."
+            },
+            {
+                "text": "Always confirm available account credits before suggesting upgrades."
+            }
+        ],
+        "generationConfig": {
+            "maxOutputTokens": 400,
+            "temperature": 0.2
+        }
+    },
+    "request": {
+        "contents": [
+            {
+                "role": "user",
+                "parts": [
+                    {
+                        "text": "Draft a short response explaining the monthly invoice increase for customer ACME."
+                    }
+                ]
+            }
+        ]
+    }
+}

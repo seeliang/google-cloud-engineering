@@ -3,4 +3,7 @@ node_modules/
 .pnpm-store/
 credential.json
 env.local.json
-google-ai-studio/results/
+*/results
+vertex/gemini-client/src/config.json
+vertex/gemini-client/request.json
+*/**/results
