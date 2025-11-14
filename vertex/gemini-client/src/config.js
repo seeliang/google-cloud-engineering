@@ -186,6 +186,9 @@ function resolveEnumValue(enumObject, value) {
 }
 
 module.exports = {
+    DEFAULT_PROJECT,
+    DEFAULT_LOCATION,
+    DEFAULT_MODEL,
     DEFAULT_SAFETY_SETTINGS,
     DEFAULT_GENERATION_CONFIG,
     DEFAULT_SYSTEM_INSTRUCTION_PARTS,

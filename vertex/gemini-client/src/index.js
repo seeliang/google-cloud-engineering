@@ -1,5 +1,8 @@
 const { VertexAI } = require('@google-cloud/vertexai');
 const {
+    DEFAULT_PROJECT,
+    DEFAULT_LOCATION,
+    DEFAULT_MODEL,
     DEFAULT_GENERATION_CONFIG,
     DEFAULT_SAFETY_SETTINGS,
     DEFAULT_SYSTEM_INSTRUCTION_PARTS,
@@ -41,6 +44,9 @@ function assertVertexInstance(instance) {
 module.exports = {
     getGenerativeModel,
     buildConfig,
+    defaultProject: DEFAULT_PROJECT,
+    defaultLocation: DEFAULT_LOCATION,
+    defaultModel: DEFAULT_MODEL,
     defaultGenerationConfig: DEFAULT_GENERATION_CONFIG,
     defaultSafetySettings: DEFAULT_SAFETY_SETTINGS,
     defaultSystemInstructionParts: DEFAULT_SYSTEM_INSTRUCTION_PARTS

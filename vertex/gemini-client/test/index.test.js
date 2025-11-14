@@ -3,6 +3,9 @@ const assert = require('node:assert/strict');
 
 const {
     buildConfig,
+    defaultProject,
+    defaultLocation,
+    defaultModel,
     defaultGenerationConfig,
     defaultSafetySettings,
     defaultSystemInstructionParts,
@@ -12,9 +15,9 @@ const {
 test('buildConfig falls back to defaults and clones arrays', (t) => {
     const config = buildConfig();
 
-    assert.strictEqual(config.project, 'your-cloud-project');
-    assert.strictEqual(config.location, 'us-central1');
-    assert.strictEqual(config.model, 'gemini-2.5-flash');
+    assert.strictEqual(config.project, defaultProject);
+    assert.strictEqual(config.location, defaultLocation);
+    assert.strictEqual(config.model, defaultModel);
 
     assert.notStrictEqual(config.safetySettings, defaultSafetySettings);
     assert.deepEqual(config.safetySettings, defaultSafetySettings);
@@ -107,13 +110,13 @@ test('getGenerativeModel delegates to provided factory', () => {
     assert.strictEqual(model, fakeModel);
 
     assert.deepEqual(factoryCalls[0], {
-        project: 'your-cloud-project',
-        location: 'us-central1'
+        project: defaultProject,
+        location: defaultLocation
     });
 
     assert.equal(requestCalls.length, 1);
     assert.deepEqual(requestCalls[0], {
-        model: 'gemini-2.5-flash',
+        model: defaultModel,
         safetySettings: defaultSafetySettings,
         generationConfig: defaultGenerationConfig,
         systemInstruction: {

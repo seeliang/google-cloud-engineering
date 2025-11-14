@@ -25,7 +25,10 @@ async function main() {
         process.exit(1);
     }
 
-    const overrides = payload.overrides ?? {};
+    const overrides = { ...(payload.overrides ?? {}) };
+    if (!overrides.model && typeof payload.model === 'string' && payload.model.trim()) {
+        overrides.model = payload.model.trim();
+    }
     const request = payload.request;
 
     const config = buildConfig(overrides);

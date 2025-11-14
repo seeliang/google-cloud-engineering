@@ -52,6 +52,7 @@ Example JSON file:
 
 ```json
 {
+  "model": "gemini-1.5-flash",
   "overrides": {
     "systemInstructionParts": [
       { "text": "You are an internal support agent." }
@@ -72,6 +73,12 @@ node scripts/runFromConfig.js scripts/sample-request.json
 ```
 
 The script writes a timestamped JSON report to `vertex/gemini-client/reports/` capturing the resolved configuration, request payload, response, and any errors.
+
+If you are relying on user credentials instead of a service account, you may need to establish Application Default Credentials first:
+
+```bash
+gcloud auth application-default login
+```
 
 ## Scripts
 
